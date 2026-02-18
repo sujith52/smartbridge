@@ -33,7 +33,7 @@ git clone https://github.com/sujith52/smartbridge.git
 ```bash
 cd backend
 npm install
-
+node server.js
 ```
 
 * Create a `.env` file and add your `MONGO_URI`.
