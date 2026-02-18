@@ -1,0 +1,7 @@
+npm create vite@latest frontend -- --template react
+
+npm tailwindcss init -p
+
+http://localhost:${PORT}
+
+find . -maxdepth 4 -not -path '*/.*' -not -path './node_modules*' -not -path './dist*' \( -name "*.js" -o -name "*.jsx" -o -name "*.css" -o -name "*.html" \) -exec sh -c 'echo "\n--- FILE: {} ---"; cat {}' \; > output.txt
