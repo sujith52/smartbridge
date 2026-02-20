@@ -51,21 +51,20 @@ app.get('/api/products', async (req, res) => {
   }
 });
 
-// 4. Listen on 0.0.0.0 for IDX
-// DON'T DO THIS: app.listen(5000);
-// DO THIS:
 
-// ... (Your existing routes)
 
-// IMPORTANT: Move the listen part inside a check so it only runs locally
+// 1. Connect to MongoDB (This needs to run everywhere, local and cloud)
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log("Connected to MongoDB Atlas"))
+  .catch(err => console.error("MongoDB Connection Error:", err));
+
+// 2. ONLY listen for local development
 if (process.env.NODE_ENV !== 'production') {
   const PORT = process.env.PORT || 3000;
-  mongoose.connect(process.env.MONGO_URI)
-    .then(() => {
-      app.listen(PORT, () => console.log(`Local Server: http://localhost:${PORT}`));
-    })
-    .catch(err => console.error(err));
+  app.listen(PORT, () => {
+    console.log(`Local Server: http://localhost:${PORT}`);
+  });
 }
 
-// Vercel needs this export to wrap your app in a serverless function
+// 3. Export for Vercel (This is what Vercel uses as a Serverless function)
 module.exports = app;
