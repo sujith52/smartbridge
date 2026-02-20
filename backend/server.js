@@ -53,12 +53,12 @@ app.get('/api/products', async (req, res) => {
 
 
 
-// 1. Connect to MongoDB (This needs to run everywhere, local and cloud)
+// 1. Connect to MongoDB (OUTSIDE of any if-blocks)
 mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log("Connected to MongoDB Atlas"))
-  .catch(err => console.error("MongoDB Connection Error:", err));
+  .then(() => console.log("✅ MongoDB Connected Successfully"))
+  .catch(err => console.error("❌ MongoDB Connection Error:", err));
 
-// 2. ONLY listen for local development
+// 2. ONLY use app.listen for local testing
 if (process.env.NODE_ENV !== 'production') {
   const PORT = process.env.PORT || 3000;
   app.listen(PORT, () => {
@@ -66,5 +66,5 @@ if (process.env.NODE_ENV !== 'production') {
   });
 }
 
-// 3. Export for Vercel (This is what Vercel uses as a Serverless function)
+// 3. EXPORT for Vercel (Crucial for serverless)
 module.exports = app;
