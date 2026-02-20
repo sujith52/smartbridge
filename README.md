@@ -1,7 +1,7 @@
 
 <div align="center">
   <a href="https://youtu.be/di9PSIrUkNc?si=cbDrEwMpRuAc7qQq">
-    <img src="https://i.ytimg.com/vi/di9PSIrUkNc/hqdefault.jpg?sqp=-oaymwEnCNACELwBSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLDZGvjmw2GZRHzkRDRYJTPiIW1jqA" style="width:50%;">
+    <img src="tumbnail.png" style="width:50%;">
   </a>
 </div>
 
