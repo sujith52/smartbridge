@@ -54,13 +54,18 @@ app.get('/api/products', async (req, res) => {
 // 4. Listen on 0.0.0.0 for IDX
 // DON'T DO THIS: app.listen(5000);
 // DO THIS:
-app.listen(PORT = 3000, '0.0.0.0', () => {
-  console.log("Server is reachable externally!");
-  console.log(`http://localhost:${PORT}`)
-});
-// 5. Database Connection (Double check your .env!)
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log("📦 Connected to ShopEZ MongoDB"))
-  .catch(err => console.error("❌ MongoDB Connection Error:", err));
 
+// ... (Your existing routes)
 
+// IMPORTANT: Move the listen part inside a check so it only runs locally
+if (process.env.NODE_ENV !== 'production') {
+  const PORT = process.env.PORT || 3000;
+  mongoose.connect(process.env.MONGO_URI)
+    .then(() => {
+      app.listen(PORT, () => console.log(`Local Server: http://localhost:${PORT}`));
+    })
+    .catch(err => console.error(err));
+}
+
+// Vercel needs this export to wrap your app in a serverless function
+module.exports = app;
